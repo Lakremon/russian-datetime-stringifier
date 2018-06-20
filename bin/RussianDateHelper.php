@@ -1,6 +1,7 @@
 <?php
-
 namespace russianDateHelper;
+
+use russianDateHelper\exception\DataTypeException;
 
 /**
  * Class russianDateHelper - main helper class
@@ -35,15 +36,19 @@ class RussianDateHelper
      * @param $data integer | \DatePeriod | \DateTime
      * @return $data integer
      */
-    protected static function prepareInData($data)
+    protected static function prepareData($data)
     {
         if (is_int($data)) {
             return $data;
         }
-        if ($data instanceof \DatePeriod::class){
-            return $data
+        if ($data instanceof \DatePeriod::$className){
+            return $data;
+        }
+        if ($data instanceof \DatePeriod::$className){
+            return $data;
         }
 
+        throw new DataTypeException();
     }
 
     /**
@@ -54,7 +59,7 @@ class RussianDateHelper
     public static function setCountOfPeriods($countOfPeriodValue)
     {
         if (!is_integer($countOfPeriodValue)) {
-            // TODO add wrong property type exception
+            throw new DataTypeException();
         }
         if ($countOfPeriodValue < 1 || $countOfPeriodValue > 7) {
             // TODO add wrong period number exception
@@ -67,12 +72,9 @@ class RussianDateHelper
      * @param $periodInSeconds integer|\DateTime
      * @return string
      */
-    public static function differenceToPeriod($period)
+    public static function getPerfectPeriod($period)
     {
-        if (!is_integer($period)) {
-            $periodInSeconds = $period;
-            // TODO add wrong property type exception
-        }
+        $periodInSeconds = self::prepareData($period);
         $result = '';
 
         $iteration = 0;

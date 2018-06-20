@@ -7,4 +7,4 @@
  */
 require_once '../bin/RussianDateHelper.php';
 
-var_dump(russianDateHelper\RussianDateHelper::timeToPeriod(3 * 24 * 60 * 60));
+var_dump(russianDateHelper\RussianDateHelper::getPerfectPeriod(3 * 24 * 60 * 60));
